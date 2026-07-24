@@ -1,0 +1,14 @@
+diff a/Assets/Scenes/GameScene.unity b/Assets/Scenes/GameScene.unity	(rejected hunks)
+@@ -21034,6 +21047,12 @@ PrefabInstance:
+     - targetCorrespondingSourceObject: {fileID: 2350652681907635850, guid: 83628a2e699576147adabb30587f44d4, type: 3}
+       insertIndex: -1
+       addedObject: {fileID: 1642013319}
++    - targetCorrespondingSourceObject: {fileID: 2350652681907635850, guid: 83628a2e699576147adabb30587f44d4, type: 3}
++      insertIndex: -1
++      addedObject: {fileID: 1642013321}
++    - targetCorrespondingSourceObject: {fileID: 2350652681907635850, guid: 83628a2e699576147adabb30587f44d4, type: 3}
++      insertIndex: -1
++      addedObject: {fileID: 1642013322}
+   m_SourcePrefab: {fileID: 100100000, guid: 83628a2e699576147adabb30587f44d4, type: 3}
+ --- !u!1001 &1565689863
+ PrefabInstance:
