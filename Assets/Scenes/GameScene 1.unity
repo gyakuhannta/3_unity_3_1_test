@@ -3659,6 +3659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7623ff1ab88786e4da66630572501378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+  playerCollider: {fileID: 0}
+  enemies: []
 --- !u!4 &327113287
 Transform:
   m_ObjectHideFlags: 0
@@ -3686,6 +3688,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3760,12 +3763,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0871558, y: -0, z: -0, w: 0.9961948}
-  m_LocalPosition: {x: 0, y: 2, z: -4}
+  m_LocalRotation: {x: 0.06162845, y: 0.7044161, z: -0.06162845, w: 0.7044161}
+  m_LocalPosition: {x: -8, y: -11, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1642013324}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 10, y: 90, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -3811,6 +3814,23 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aebc245a2b986049aa3310e04b7fb05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameCamera
+  playerInput: {fileID: 1642013319}
+  lookTarget: {fileID: 1642013324}
+  offset: {x: -1, y: 2, z: 0}
+  targetDistance: 1
+  rotateSpeed: 5
 --- !u!1001 &336885243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21074,17 +21094,14 @@ PrefabInstance:
     - target: {fileID: 8818148501639231403, guid: 83628a2e699576147adabb30587f44d4, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: 4c11cadabff731543ae059bf3d148817, type: 2}
     - target: {fileID: 8818148501639231403, guid: 83628a2e699576147adabb30587f44d4, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1327674205686831306, guid: 83628a2e699576147adabb30587f44d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 330585546}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2350652681907635850, guid: 83628a2e699576147adabb30587f44d4, type: 3}
       insertIndex: -1
@@ -22563,10 +22580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   speedMax: 10
-  accel: 3
-  rotateSpeed: 2
+  accel: 5
+  rotateSpeed: 4
   animator: {fileID: 165163894}
-  jumpSpeed: 2
+  jumpSpeed: 5
   groundNormalYMin: 0.7
   groundDamping: 8
   airDamping: 0.5
@@ -27528,3 +27545,4 @@ SceneRoots:
   - {fileID: 1136974507}
   - {fileID: 1533009036}
   - {fileID: 327113287}
+  - {fileID: 330585546}

@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         }
 
         // 攻撃
-        if (playerInput.actions["Attack"].WasPressedThisFrame())
+       /* if (playerInput.actions["Attack"].WasPressedThisFrame())
         {
             var position = transform.position + transform.TransformVector(fireOffset);
             var fireObj = Object.Instantiate(firePrefab, position, transform.rotation);
@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
                 fireRB.linearVelocity = transform.forward * fireSpeed;
             }
         }
-
+       */
 
         // 無敵時間を減らす
         if (invincibleTime > 0)
