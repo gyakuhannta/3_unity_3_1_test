@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] int hp = 10;
     [SerializeField] float invincibleTimeMax = 0.5f;
     [SerializeField] float knockbackSpeed = 5;
+    public bool input=true;
 
     PlayerInput playerInput;
     Rigidbody rb;
@@ -51,72 +52,75 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGrounded)
+        if (input == true)
         {
-            var accelVec = playerInput.actions["Move"].ReadValue<Vector2>();
-
-            var cameraDir = playerInput.camera.transform.forward;
-            cameraDir.y = 0;
-            cameraDir = cameraDir.normalized;
-
-            var cameraRight = playerInput.camera.transform.right;
-
-            var accelVec3D =
-                cameraDir * accelVec.y * accel
-                + cameraRight * accelVec.x * accel;
-            rb.AddForce(accelVec3D, ForceMode.Acceleration);
-
-            // プレイヤーの向きを変える
-            if (accelVec3D != Vector3.zero)
+            if (isGrounded)
             {
-                rotateTarget = accelVec3D.normalized;
+                var accelVec = playerInput.actions["Move"].ReadValue<Vector2>();
+
+                var cameraDir = playerInput.camera.transform.forward;
+                cameraDir.y = 0;
+                cameraDir = cameraDir.normalized;
+
+                var cameraRight = playerInput.camera.transform.right;
+
+                var accelVec3D =
+                    cameraDir * accelVec.y * accel
+                    + cameraRight * accelVec.x * accel;
+                rb.AddForce(accelVec3D, ForceMode.Acceleration);
+
+                // プレイヤーの向きを変える
+                if (accelVec3D != Vector3.zero)
+                {
+                    rotateTarget = accelVec3D.normalized;
+                }
             }
-        }
 
-        // 前方向をコピーしておく
-        Vector3 forward = transform.forward;
+            // 前方向をコピーしておく
+            Vector3 forward = transform.forward;
 
-        // 上方向を固定
-        transform.up = Vector3.up;
+            // 上方向を固定
+            transform.up = Vector3.up;
 
-        // 前方向をターゲットに向かって補間
-        var targetForward = Vector3.Slerp(forward, rotateTarget, rotateSpeed * Time.deltaTime);
-        if (targetForward != Vector3.zero)
-        {
-            transform.forward = targetForward;
-        }
-
-        // アニメーターのMoveSpeedパラメータに Rigidbody の移動速度の大きさを与える
-        Vector3 velocityXZ = rb.linearVelocity;
-        velocityXZ.y = 0;
-        animator.SetFloat("MoveSpeed", velocityXZ.magnitude);
-
-        // ジャンプ
-        if (playerInput.actions["Jump"].WasPressedThisFrame()
-            && isGrounded)
-        {
-            Vector3 jumpVec = new Vector3(0, jumpSpeed, 0);
-            rb.AddForce(jumpVec, ForceMode.VelocityChange);
-        }
-
-        // 攻撃
-       /* if (playerInput.actions["Attack"].WasPressedThisFrame())
-        {
-            var position = transform.position + transform.TransformVector(fireOffset);
-            var fireObj = Object.Instantiate(firePrefab, position, transform.rotation);
-            var fireRB = fireObj.GetComponent<Rigidbody>();
-            if (fireRB != null)
+            // 前方向をターゲットに向かって補間
+            var targetForward = Vector3.Slerp(forward, rotateTarget, rotateSpeed * Time.deltaTime);
+            if (targetForward != Vector3.zero)
             {
-                fireRB.linearVelocity = transform.forward * fireSpeed;
+                transform.forward = targetForward;
             }
-        }
-       */
 
+            // アニメーターのMoveSpeedパラメータに Rigidbody の移動速度の大きさを与える
+            Vector3 velocityXZ = rb.linearVelocity;
+            velocityXZ.y = 0;
+            animator.SetFloat("MoveSpeed", velocityXZ.magnitude);
+
+            // ジャンプ
+            if (playerInput.actions["Jump"].WasPressedThisFrame()
+                && isGrounded)
+            {
+                Vector3 jumpVec = new Vector3(0, jumpSpeed, 0);
+                rb.AddForce(jumpVec, ForceMode.VelocityChange);
+            }
+
+            // 攻撃
+            /* if (playerInput.actions["Attack"].WasPressedThisFrame())
+             {
+                 var position = transform.position + transform.TransformVector(fireOffset);
+                 var fireObj = Object.Instantiate(firePrefab, position, transform.rotation);
+                 var fireRB = fireObj.GetComponent<Rigidbody>();
+                 if (fireRB != null)
+                 {
+                     fireRB.linearVelocity = transform.forward * fireSpeed;
+                 }
+             }
+            */
+        }
         // 無敵時間を減らす
         if (invincibleTime > 0)
         {
             invincibleTime -= Time.deltaTime;
         }
+
     }
 
     private void OnCollisionStay(Collision collision)
